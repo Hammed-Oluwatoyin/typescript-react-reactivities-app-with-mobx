@@ -1,5 +1,5 @@
 {
-  "name": "investment-app",
+  "name": "typescript-react-redux-toolkit-redux-saga",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,10 +10,20 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/uuid": "^8.3.0",
+    "axios": "^0.21.0",
+    "mobx": "^6.0.4",
+    "mobx-react-lite": "^3.1.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
     "react-scripts": "4.0.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.1.3",
     "typescript": "^4.0.3",
+    "uuid": "^8.3.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
