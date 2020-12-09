@@ -3,36 +3,45 @@ import ReactDOM from 'react-dom';
 
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
-import RootStore from "./store/root-store";
+
+import {createStore} from "./store/helpers/create-store";
+import {StoreProvider} from "./store/helpers/store-context";
+
+
+// const rootStore = new RootStore();
+// console.log(rootStore);
 
 
 
-const rootStore = new RootStore();
-console.log(rootStore);
+// //lets take the user so we can do actions on him
+// const newUser = rootStore.dataStores.usersStore.getUser('Hammed');
+
+// //lets add some todos to the user
+// rootStore.dataStores.todoStore.addTodo('finish The Exercise', newUser.id)
+// rootStore.dataStores.todoStore.addTodo('Learn Mobx', newUser.id);
+
+// console.log(`${newUser.name} Todos:${newUser.todos.map(todo => todo.name)}`);
 
 
+// //now we remove him
+// rootStore.dataStores.usersStore.removeUser('Hammed')
+
+const rootStore = createStore();
 // create 4 Users
 rootStore.dataStores.usersStore.addUser('Hammed');
-rootStore.dataStores.usersStore.addUser('Student 1');
-rootStore.dataStores.usersStore.addUser('Student 2');
-rootStore.dataStores.usersStore.addUser('Student 3');
-
-//lets take the user so we can do actions on him
-const newUser = rootStore.dataStores.usersStore.getUser('Hammed');
-
-//lets add some todos to the user
-rootStore.dataStores.todoStore.addTodo('finish The Exercise', newUser.id)
-rootStore.dataStores.todoStore.addTodo('Learn Mobx', newUser.id);
-
-console.log(`${newUser.name} Todos:${newUser.todos.map(todo => todo.name)}`);
+rootStore.dataStores.usersStore.addUser('Ikenna');
+rootStore.dataStores.usersStore.addUser('Seyi');
+rootStore.dataStores.usersStore.addUser('Lasisi');
 
 
-//now we remove him
-rootStore.dataStores.usersStore.removeUser('Hammed')
+
 ReactDOM.render(
-  <React.StrictMode>
+  <StoreProvider  value={rootStore}>
+<React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </StoreProvider>
+  ,
   document.getElementById('root')
 );
 

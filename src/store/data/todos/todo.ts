@@ -1,5 +1,5 @@
 import { action,observable, makeObservable, reaction} from 'mobx';
-
+import TodoStore from "./todo-store";
 let runningId = 0;
 
 export default class Todo {
@@ -12,9 +12,13 @@ export default class Todo {
 @observable
     isCompleted: boolean = false;
 
-    // private readonly disposer: () => void;
+     private readonly disposer: () => void;
 
-    constructor (name:string, userId: number) {
+     private store: TodoStore;
+
+    constructor (name:string, userId: number, store: TodoStore) {
+
+        this.store =store;
         this.name = name;
         this.id = runningId++;
         this.userId = userId;
@@ -25,13 +29,16 @@ export default class Todo {
             toggleTodo: action,
             updateName: action
         })
-    //   this.disposer =  reaction(
-    //         () => this.isCompleted,
-    //         () => console.log(`Todo ${this.name} changed to ${this.isCompleted ? 'Done' : 'isCompleted'}`)
-    //     )
+       this.disposer =  reaction(
+            () => this.isCompleted,
+            () => console.log(`Todo ${this.name} changed to ${this.isCompleted ? 'Done' : 'isCompleted'}`)
+        )
 
     }
 
+    remove () {
+        this.store.removeTodo(this.name);
+    }
 
 
     @action
@@ -44,8 +51,8 @@ export default class Todo {
         this.name = name;
     }
 
-    // dispose() {
-    //     this.disposer()
-    // // }
+    dispose() {
+        this.disposer()
+     }
 }
 

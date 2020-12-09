@@ -1,24 +1,40 @@
-import {makeObservable, observable, computed, autorun} from "mobx";
+import {makeObservable, observable, computed, autorun, action} from "mobx";
 import RootStore from "../root-store";
 
+
+export enum Views {
+    Todos,
+    Users
+}
+
 export default class GlobalView {
-    @observable
-    color: string = "green";
+    
+    
     private rootStore: RootStore;
 
+    @observable currentView: Views = Views.Todos;
+
     constructor(rootStore: RootStore) {
-        this.rootStore =rootStore;
+        this.rootStore = rootStore;
 
       
 
         makeObservable(this, {
-            color: observable,
-            stats: computed
+            currentView: observable,
+            stats: computed,
+            setView: action
         })
         autorun( () => {
             console.log(this.stats);
         });
     }
+
+    @action setView(view: Views) {
+        this.currentView = view;
+    }
+
+
+
 
 @computed 
 get stats() {

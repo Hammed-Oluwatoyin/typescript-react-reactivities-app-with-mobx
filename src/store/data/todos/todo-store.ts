@@ -35,7 +35,7 @@ export default class TodoStore {
 
     @action 
     addTodo(name:string, userId:number){
-        this.todoList.push(new Todo(name, userId));
+        this.todoList.push(new Todo(name, userId, this));
     }
 
     getUserTodos(userId: number){
@@ -65,11 +65,11 @@ removeTodo(name:string){
 
 @computed
 get completedTodos() {
-    return this.todoList.filter(todo => todo.isCompleted).length;
+    return this.todoList.filter(todo => todo.isCompleted);
 }
 
 @computed
 get inCompletedTodos() {
-    return this.todoList.filter(todo => !todo.isCompleted).length;
+    return this.todoList.filter(todo => !todo.isCompleted);
 }
 }
