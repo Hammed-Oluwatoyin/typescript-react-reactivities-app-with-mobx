@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import {Grid} from 'semantic-ui-react';
 import {IActivity} from '../../../app/models/activity';
 import ActivityDetails from '../details/ActivityDetails';
@@ -15,16 +15,21 @@ interface IProps {
     setSelectedActivity: (selectedActivity: IActivity | null) => void;
     handleCreateActivity: (activity : IActivity ) => void
     handleEditActivity: (activity : IActivity ) => void
-    handleDeleteActivity: (id: string) => void;
+    handleDeleteActivity: (event:SyntheticEvent<HTMLButtonElement>,  id: string) => void;
+    submitting : boolean;
+    target : string;
+
 }
 
 const ActivityDashboard: React.FC<IProps> = ({activities, handleSelectActivity, selectedActivity,
                                                  editMode ,setEditMode, setSelectedActivity, 
-                                                 handleCreateActivity, handleEditActivity, handleDeleteActivity}) => {
+                                                 handleCreateActivity, handleEditActivity, handleDeleteActivity ,
+                                                 target, submitting}) => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <ActivityList activities={activities} handleSelectActivity={handleSelectActivity} handleDeleteActivity={handleDeleteActivity} />
+                <ActivityList activities={activities} handleSelectActivity={handleSelectActivity}
+                             handleDeleteActivity={handleDeleteActivity} submitting={submitting} target={target} />
          </Grid.Column>
          <Grid.Column width={6}>
               {selectedActivity &&  !editMode && 
@@ -34,7 +39,8 @@ const ActivityDashboard: React.FC<IProps> = ({activities, handleSelectActivity, 
                setSelectedActivity = {setSelectedActivity}/> } 
                {editMode && <ActivityForm  key = {selectedActivity && selectedActivity.id || 0}
                                             setEditMode ={setEditMode} selectedActivity = {selectedActivity}
-                                            handleCreateActivity = {handleCreateActivity} handleEditActivity={handleEditActivity} /> } 
+                                            handleCreateActivity = {handleCreateActivity} handleEditActivity={handleEditActivity}
+                                            submitting= {submitting} /> } 
          </Grid.Column >
 
           </Grid>  

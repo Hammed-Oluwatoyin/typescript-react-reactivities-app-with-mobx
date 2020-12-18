@@ -1,4 +1,4 @@
-import { StrictRatingIconProps } from "semantic-ui-react";
+
 
 export interface IActivity {
 

@@ -6,11 +6,12 @@ import {v4 as uuid} from 'uuid';
 interface IProps {
     setEditMode : (editMode:boolean) => void;
     selectedActivity : IActivity | null;
-    handleCreateActivity: (activity : IActivity ) => void
-    handleEditActivity: (activity : IActivity ) => void
+    handleCreateActivity: (activity : IActivity ) => void;
+    handleEditActivity: (activity : IActivity ) => void;
+    submitting: boolean;
 }
 
-const ActivityForm : React.FC <IProps>= ({setEditMode , selectedActivity , handleCreateActivity, handleEditActivity}) => {
+const ActivityForm : React.FC <IProps>= ({setEditMode , selectedActivity , handleCreateActivity, handleEditActivity, submitting}) => {
 
     const initializeForm = () => {
         if (selectedActivity) {
@@ -93,7 +94,7 @@ const ActivityForm : React.FC <IProps>= ({setEditMode , selectedActivity , handl
           name = 'venue'
           
           />
-        <Button floated='right' positive type='submit' content='submit'/>
+        <Button loading={submitting} floated='right' positive type='submit' content='submit'/>
         <Button  onClick= {() => setEditMode(false)} floated='right'  type='submit' content='cancel'/>
         </Form>
         </Segment>
