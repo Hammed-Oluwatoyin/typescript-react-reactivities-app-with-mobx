@@ -27,7 +27,7 @@ const activities = [
        { id:"3",
         category: "film",
         city:"Chicago",
-        date: "2019-05-01T13:47:30.6008.33",
+        date: "2019-06-01T13:47:30.6008.33",
         description:"Activity 6 months Ago",
         title:"Past Activity 3",
         venue:"stadium"
@@ -35,7 +35,7 @@ const activities = [
          { id: "4",
           category: "food",
           city:"madrid",
-          date: "2019-05-01T13:47:30.6008.33",
+          date: "2019-06-01T13:47:30.6008.33",
           description:"Activity 5 months Ago",
           title:"Past Activity 4",
           venue:"santiago bernabau"
@@ -43,7 +43,7 @@ const activities = [
            { id: "5",
             category: "travel",
             city:"stockholm",
-            date: "2019-05-01T13:47:30.6008.33",
+            date: "2019-07-01T13:47:30.6008.33",
             description:"Activity 4 months Ago",
             title:"Past Activity 5",
             venue:"Art Museums"
@@ -51,7 +51,7 @@ const activities = [
              { id: "6",
               category: "music",
               city:"miami",
-              date: "2019-05-01T13:47:30.6008.33",
+              date: "2019-07-01T13:47:30.6008.33",
               description:"Activity 3 months Ago",
               title:"Past Activity 6",
               venue:"Beach"
@@ -59,7 +59,7 @@ const activities = [
                { id: "7",
                 category: "drinks",
                 city:"inglewood",
-                date: "2019-05-01T13:47:30.6008.33",
+                date: "2019-07-01T13:47:30.6008.33",
                 description:"Activity 2 months Ago",
                 title:"Past Activity 7",
                 venue:"Central Park"
@@ -67,7 +67,7 @@ const activities = [
                  { id: "8",
                   category: "culture",
                   city:"Las Vegas",
-                  date: "2019-05-01T13:47:30.6008.33",
+                  date: "2019-08-01T13:47:30.6008.33",
                   description:"Activity 2 months Ago",
                   title:"Past Activity 8",
                   venue:"MGM Grand"
@@ -75,7 +75,7 @@ const activities = [
                    { id: "9",
                     category: "travel",
                     city:"NewYork",
-                    date: "2019-05-01T13:47:30.6008.33",
+                    date: "2019-08-01T13:47:30.6008.33",
                     description:"Activity 1 months Ago",
                     title:"Past Activity 9",
                     venue:" Arena"
@@ -86,6 +86,13 @@ const activities = [
 app.get("/api/activities", (req, res) => {
   res.json(activities);
 });
+app.get("/api/activities/:id", (req, res) => {
+  const index = activities.findIndex(activities => activities.id === parseInt(req.params.id));
+  const activity = activities[index];
+ 
+
+  res.json(activity);
+})
 
 app.post("/api/activities", (req, res) => {
   const activity = { id: Date.now(),  ...req.body };
@@ -97,9 +104,6 @@ app.post("/api/activities", (req, res) => {
 app.put("/api/activities/:id", (req, res) => {
   const index = activities.findIndex(activities => activities.id === parseInt(req.params.id));
   const activity = activities[index];
-  // if ("resolved" in req.body) bug.resolved = req.body.resolved;
-  // if ("userId" in req.body) bug.userId = req.body.userId;
-
   res.json(activity);
 });
 
